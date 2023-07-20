@@ -1,4 +1,4 @@
-##support converting binary file into text file and restoring, hex String, utf-8, ansi, latin text
+## Support converting binary file into text file and restoring, hex String, utf-8, ansi, latin text
 
 >### binaryToText
  https://github.com/jk1742/BinaryTextConverter/blob/main/bin/binaryToText.exe
