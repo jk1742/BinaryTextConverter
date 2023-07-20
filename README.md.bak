@@ -1,0 +1,8 @@
+support hex String, utf-8
+
+binaryToText
+>> https://github.com/jk1742/BinaryTextConverter/blob/main/bin/binaryToText.exe
+
+
+textTobinary
+>> https://github.com/jk1742/BinaryTextConverter/blob/main/bin/textToBinary.exe
