@@ -11,9 +11,11 @@ import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Scanner;
 
-public class TextToBinaryConverter {
+public class TextToBinaryConverter extends CommandConverterHandler {
 	public static void main(String[] args) throws IOException {
+		TextToBinaryConverter converter = new TextToBinaryConverter();
 		if (args.length < 2) {
+			System.out.println("textToBinary [text file][aplication name][--type [\"utf-8 | hex | ansi | latin\"]] ");
 			System.out.println("please insert proper arguments");
 			System.out.println("    obligataries: [text file] [aplication name]");
 			System.out.println("    options: [--type \"utf-8 | hex | ansi | latin\"]");
@@ -36,7 +38,8 @@ public class TextToBinaryConverter {
 		String 	characterType 	= "utf-8"; 
 		Charset charset 		= null;
 		try {
-			characterType = CommandConverterHandler.pickArguments("--type", 1, args,"--")[0];
+			String[] strArray = converter.pickArguments("--type", 1, args,"--");
+			if(strArray != null)characterType = strArray[0];
 		} catch (IllegalArgumentException e1) {
 			if("IllegalArgument".equals(e1.getMessage())) System.out.println("\"--type\" Input Arguments error. Please, Check your arguements");
 		}
@@ -48,7 +51,7 @@ public class TextToBinaryConverter {
 		String 					stringData 	= null;
 		try {
 			File file = new File(sourcePath.toString());
-			charset = CommandConverterHandler.recogCharsets(characterType);
+			charset = converter.recogCharsets(characterType);
 			//
 			// read text file
 		    @SuppressWarnings("resource")
@@ -59,7 +62,7 @@ public class TextToBinaryConverter {
 		    //
 		    // convert string to byte
 			if("HEX".equals(characterType.toUpperCase())) {
-				byteData = CommandConverterHandler.convertHexStringToBytes(stringData);
+				byteData = converter.convertHexStringToBytes(stringData);
 			} else {
 				byteData = Base64.getDecoder().decode(stringData);				
 			}
@@ -77,13 +80,15 @@ public class TextToBinaryConverter {
 		}
 		String strSize = String.valueOf((byteData.length/1024));
 		strSize = strSize.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-		System.out.println("***");
-		System.out.println("*** Commance decoding ...");
-		System.out.println("***          status     : Generated binary");
-		System.out.println("***          source     : " + sourcePath);
-		System.out.println("***          destination: " + destinationPath);
-		System.out.println("***          charset    : " + charset);
-		System.out.println("***          length     : " + strSize +"kb");
-		System.out.println("***          author     : jk1742 2023-07-19");
+		System.out.println();
+		System.out.println("textToBinary ");
+		System.out.println("    source      : " + sourcePath);
+		System.out.println("    destination : " + destinationPath);
+		System.out.println("    charset     : " + charset);
+		System.out.println("    length      : " + strSize +"kb");
+		System.out.println("    status      : Generating a binary file completed");
+		System.out.println("    author      : jk1742@synthesis-intelect.net");
+		System.out.println("    version     : 0.0.1");
+		System.out.println();
 	}
 }

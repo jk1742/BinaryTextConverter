@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="C:/Temp/binaryToTextConverter.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/BinaryTextConverter/src/binaryToText.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="true" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=BinaryTextConverter/src&lt;app.BinaryTextConverter{BinaryToTextConverter.java[BinaryToTextConverter" manifestLocation="/BinaryTextConverter/src/binaryToText.mf" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal>
+                <package handleIdentifier="=BinaryTextConverter/src&lt;app.BinaryTextConverter"/>
+            </packagesToSeal>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=BinaryTextConverter/src&lt;app.BinaryTextConverter{BinaryToTextConverter.java"/>
+    </selectedElements>
+</jardesc>

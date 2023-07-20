@@ -15,7 +15,7 @@ public class CommandConverterHandler {
 	 * @return
 	 * @throws Exception 
 	 */
-	protected static String[] pickArguments(String param, int argsNumber, String[] args, String indexCharacter) throws IllegalArgumentException {
+	protected String[] pickArguments(String param, int argsNumber, String[] args, String indexCharacter) throws IllegalArgumentException {
 		boolean sw = false;
 		int pos = 0;
 		String[] carriage = new String[argsNumber];
@@ -23,13 +23,15 @@ public class CommandConverterHandler {
 		for (int i = 0; i < args.length; i++) {
 			String entry = args[i];
 			if(param.equals(entry)){
-				pos = i;
+				pos = i+1;
 				sw = true;
 				break;
 			}
 		}
+		if(!sw) return null;
+		if(args.length<=pos) return null;
 		// copy result
-		System.arraycopy (args, pos+1, carriage, 0, argsNumber);
+		System.arraycopy (args, pos, carriage, 0, argsNumber);
 		for (int i = 0; i < carriage.length; i++) {
 			String entry = carriage[i];
 			if(entry.startsWith(indexCharacter)) {
@@ -81,7 +83,7 @@ public class CommandConverterHandler {
 	 * @param characterType
 	 * @return
 	 */
-	protected static Charset recogCharsets(String characterType) {
+	protected Charset recogCharsets(String characterType) {
 		if(characterType != null) {
 			characterType = characterType.toUpperCase();
 		}
@@ -111,7 +113,7 @@ public class CommandConverterHandler {
 	 * @param bytes
 	 * @return
 	 */
-	protected static String convertByteToHexString(byte[] bytes) {
+	protected String convertByteToHexString(byte[] bytes) {
 		StringBuilder fileString = new StringBuilder();
 		for (int i = 0; i < bytes.length; i++) {
 			String code = Integer.toHexString(bytes[i]);
@@ -131,7 +133,7 @@ public class CommandConverterHandler {
 	 * @param source
 	 * @return
 	 */
-	protected static byte[] convertHexStringToBytes(String source) {
+	protected byte[] convertHexStringToBytes(String source) {
 		String hexStore[] = splitText(2, source);
 		byte[] bytes = new byte[hexStore.length];
 		for (int i = 0; i < hexStore.length; i++) {

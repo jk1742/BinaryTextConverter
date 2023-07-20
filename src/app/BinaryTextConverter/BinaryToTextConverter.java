@@ -12,12 +12,16 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 
-public class BinaryToTextConverter{
+public class BinaryToTextConverter extends CommandConverterHandler{
 	
 	public static void main(String[] args) throws IOException {
+		
+		BinaryToTextConverter converter = new BinaryToTextConverter();
 		//
 		// input argument check
 		if (args.length < 1) {
+			System.out.println();
+			System.out.println("binaryToText [binary file name][--type [\"utf-8 | hex | ansi | latin\"]] ");
 			System.out.println("Please, Insert proper arguments");
 			System.out.println("    First argument must be file name with location. [binary file name]");
 			System.out.println("    options: [--type \"utf-8 | hex | ansi | latin\"]");
@@ -39,7 +43,8 @@ public class BinaryToTextConverter{
 		String characterType = "utf-8"; 
 		Charset charset = null;
 		try {
-			characterType = CommandConverterHandler.pickArguments("--type", 1, args,"--")[0];
+			String[] strArray = converter.pickArguments("--type", 1, args,"--");
+			if(strArray != null)characterType = strArray[0];
 		} catch (IllegalArgumentException e1) {
 			if("IllegalArgument".equals(e1.getMessage())) System.out.println("\"--type\" Input Arguments error. Please, Check your arguements");
 		}
@@ -63,9 +68,9 @@ public class BinaryToTextConverter{
 		}
 		String contents="";
 		if("HEX".equals(characterType.toUpperCase())) {
-			contents	= CommandConverterHandler.convertByteToHexString(bytes);
+			contents	= converter.convertByteToHexString(bytes);
 		} else {
-			charset 	= CommandConverterHandler.recogCharsets(characterType);
+			charset 	= converter.recogCharsets(characterType);
 			contents 	= new String(Base64.getEncoder().encode(bytes), charset);
 		}
 		try {
@@ -81,14 +86,20 @@ public class BinaryToTextConverter{
 		//	calculate file size
 		String strSize = String.valueOf((contents.length()/1024));
 		strSize = strSize.replaceAll("\\B(?=(\\d{3})+(?!\\d))", ",");
-		System.out.println("***");
-		System.out.println("*** Commance encoding ...");
-		System.out.println("***          status     : Generated encoded text");
-		System.out.println("***          source     : " + sourcePath);
-		System.out.println("***          destination: " + destinationPath);
-		System.out.println("***          charset    : " + charset);
-		System.out.println("***          length     : " + strSize +"kb");
-		System.out.println("***          author     : jk1742 2023-07-19");
+		System.out.println();
+		System.out.println("binaryToText ");
+		System.out.println("    source      : " + sourcePath);
+		System.out.println("    destination : " + destinationPath);
+		System.out.println("    charset     : " + charset);
+		System.out.println("    length      : " + strSize +"kb");
+		System.out.println("    status      : Generating a encoded-text completed");
+		System.out.println("    author      : jk1742@synthesis-intelect.net");
+		System.out.println("    version     : 0.0.1");
+		System.out.println();
+	}
+	
+	BinaryToTextConverter(){
+		
 	}
 	
 }
